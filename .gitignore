@@ -1,0 +1,14 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# Quantum ESPRESSO build/run leftovers
+*.tar.gz
+*.save/
+*.wfc*
+*.igk*
+*.mix*
+*.out.orig
+espresso/
