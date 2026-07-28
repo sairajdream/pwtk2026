@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>qeinput Setup - Day 2</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #555555;
+    --code-bg: #f2f2f2;
+    --code-border: #ddd;
+    --accent: #0a5cff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a;
+      --fg: #eaeaea;
+      --muted: #a0a0a0;
+      --code-bg: #1e2126;
+      --code-border: #33373d;
+      --accent: #6ea8ff;
+    }
+  }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.5rem;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  main {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+  p.sub {
+    color: var(--muted);
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+  }
+  .step {
+    margin-bottom: 2rem;
+  }
+  .step h2 {
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem 0;
+  }
+  .step h2 .num {
+    display: inline-block;
+    width: 1.6rem;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    text-align: center;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+  }
+  a {
+    color: var(--accent);
+    word-break: break-all;
+  }
+  code, pre {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.85rem;
+  }
+  .codeblock {
+    position: relative;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 8px;
+    padding: 0.9rem 3rem 0.9rem 1rem;
+    overflow-x: auto;
+    margin: 0;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--muted);
+  }
+  .copy-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .copy-btn svg {
+    width: 1rem;
+    height: 1rem;
+  }
+  .copy-btn .icon-check {
+    display: none;
+  }
+  .copy-btn.copied .icon-copy {
+    display: none;
+  }
+  .copy-btn.copied .icon-check {
+    display: block;
+  }
+  .copy-btn.copied {
+    color: #2fa84f;
+    border-color: #2fa84f;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>qeinput - Day 2 Setup</h1>
+  <p class="sub">Follow these three steps in order.</p>
+
+  <div class="step">
+    <h2><span class="num">1</span>Repo</h2>
+    <a href="https://github.com/sairajdream/qeinput" target="_blank" rel="noopener">github.com/sairajdream/qeinput</a>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">2</span>Install</h2>
+    <div class="codeblock">
+      <pre><code>curl -fsSL https://raw.githubusercontent.com/sairajdream/qeinput/main/install.sh | bash</code></pre>
+      <button class="copy-btn" type="button" aria-label="Copy command" onclick="copyCode(this)">
+        <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">3</span>If you see an error, run this</h2>
+    <div class="codeblock">
+      <pre><code>conda activate ase-env
+pip install "mp-api==0.45.13" "emmet-core==0.85.1" "pymatgen==2025.10.7" "scipy>=1.15" "ase>=3.29"</code></pre>
+      <button class="copy-btn" type="button" aria-label="Copy command" onclick="copyCode(this)">
+        <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+    </div>
+  </div>
+</main>
+<script>
+  function copyCode(btn) {
+    const code = btn.previousElementSibling.querySelector("code").innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.classList.add("copied");
+      setTimeout(() => btn.classList.remove("copied"), 1500);
+    });
+  }
+</script>
+</body>
+</html>
