@@ -1,0 +1,60 @@
+# This example shows the PWTK capabilities to plot spin-polarized
+# PDOSes and LDOSes. The structure considered is a bulk Fe.
+
+# the pw.x input data for Fe-bulk
+import Fe.pwtk
+
+# basic input data for projwfc.x
+
+PROJWFC {
+    DeltaE  = 0.05
+}
+
+# the name used for the I/O files
+set name Fe
+
+# this makes the Gnuplot plotting window alive for 3 seconds
+#::pwtk::gp::pause 0.3 
+
+
+# Options:
+# * the -scf option requests the SCF pw.x calculation
+# * the -nscf {8 8 8} requests the NSCF pw.x calculation with a denser non-shifted 16x16x16 k-mesh
+
+pdos_run -scf -nscf {16 16 16} -t win $name
+
+# these are not really needed and are used to get simpler filenames
+sumpdos -f $name -l s Fe-s.pdos
+sumpdos -f $name -l d Fe-d.pdos
+sumldos -f $name -s Fe Fe-total.ldos
+
+
+# we will use the PDOS specs twice below, hence we store them into a variable.
+#
+# the specs below illustrate how to specify which PDOSes to plot with
+# ::pwtk::pdos_multiplot; one can specify individual orbitals, orbital
+# combinations (expressions), predefined orbitals combinations (e.g. t2g,
+# eg), or "ldos" which stands for the sum of all orbitals of a given
+# type (e.g. for p orbitals, ldos = px + py + pz)
+
+set plot_pdoses {
+    {
+        Fe-total.ldos ldos
+        Fe-s.pdos ldos
+        Fe-d.pdos ldos
+    }
+    {
+        Fe-d.pdos t2g
+        Fe-d.pdos eg
+    }
+    {Fe-d.pdos dz2}
+    {Fe-d.pdos dx2y2}
+    {Fe-d.pdos {dzx + dzy}}
+    {Fe-d.pdos dxy}
+}
+
+# let's plots PDOSes into a default window and PDF file with ::pwtk::pdos_multiplot
+
+pdos_multiplot -xr -10:10 -e pw.$name.nscf.out -t win $plot_pdoses $name
+pdos_multiplot -xr -10:10 -e pw.$name.nscf.out -t pdf $plot_pdoses $name
+

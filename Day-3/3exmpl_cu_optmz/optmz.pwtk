@@ -1,0 +1,89 @@
+# =============================
+# General purpose optimisation
+# =============================
+
+set SYSTEM_NAME "cu"
+
+load_fromPWI $SYSTEM_NAME.in
+
+restart on
+# =============================
+# 1D scan of k points
+# =============================
+
+scanpar k [seq 4 4 20] {
+    K_POINTS automatic "$k $k $k  1 1 1"
+    write k.$SYSTEM_NAME.dat [pwo_totene [runPW scf.$SYSTEM_NAME.k$k]]
+}
+
+plot -t png \
+     -title {"k point convergence" font "Helvetica,14"} \
+     -xl "k of k x k x k" \
+     -yl "Total energy in Ry" \
+     -yf %.4f \
+     k.$SYSTEM_NAME.dat
+
+
+# =============================
+# 2D scan of ecutwfc and dual
+# =============================
+
+set datList {}
+
+foreach dual {4 8 12} {
+
+    set dat ecut.$SYSTEM_NAME.dual$dual.dat
+
+    scanpar ecut [seq 25 5 45] {
+        SYSTEM "ecutwfc = $ecut
+                ecutrho = $ecut*$dual"
+        write $dat [pwo_totene [runPW scf.$SYSTEM_NAME.e$ecut.d$dual]]
+    }
+
+    lappend datList $dat
+}
+
+plot -t png \
+     -title {"ecutwfc and dual convergence" font "Helvetica,14"} \
+     -xl "ecutwfc in Ry" \
+     -yl "Total energy in Ry" \
+     -yf %.3f \
+     {*}$datList
+
+
+# =============================
+# 3D scan of smearing, degauss, and k
+# =============================
+
+array set data {}
+
+foreach k {4 8 12 16} {
+    foreach smearing {gauss m-p m-v} {
+
+        set smearName [string map {" " ""} $smearing]
+
+        set dat $smearName.$SYSTEM_NAME.k$k.dat
+
+        scanpar degauss {0.01 0.03 0.06 0.09} {
+
+            SYSTEM "smearing = '$smearing'
+                     degauss  = $degauss"
+
+            K_POINTS automatic "$k $k $k  1 1 1"
+
+            write $dat \
+               [pwo_totene \
+               [runPW scf.$SYSTEM_NAME.d$degauss.$smearName.k$k]]
+        }
+
+        lappend data($smearName) $dat
+    }
+}
+
+multiplot -t png \
+          -title {"Effect of smearing and degauss on total energy" font "Helvetica,14"} \
+          -xl "degauss in Ry" \
+          -yl "Total energy in Ry" \
+          -yf %.3f \
+          $data(gauss) $data(m-p) $data(m-v)
+

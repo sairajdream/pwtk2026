@@ -1,0 +1,36 @@
+ &CONTROL
+   calculation = 'scf'
+   outdir      = './fe'
+   pseudo_dir  = '/home/sai/espresso/pseudo'
+ /
+
+ &SYSTEM
+   A                         = 2.87
+   degauss                   = 1e-2
+   ecutrho                   = 140.0
+   ecutwfc                   = 20.0
+   ibrav                     = 3
+   nat                       = 1
+   nbnd                      = 8
+   nspin                     = 2
+   ntyp                      = 1
+   occupations               = 'smearing'
+   smearing                  = 'gauss'
+   starting_magnetization(1) = 1.0
+ /
+
+ &ELECTRONS
+   conv_thr = 1e-9
+ /
+
+ATOMIC_SPECIES 
+    Fe  1.0  Fe.pbe-nd-rrkjus.UPF
+
+ATOMIC_POSITIONS alat
+  Fe       0.000000000000   0.000000000000   0.000000000000
+
+K_POINTS automatic
+  4   4   4   0   0   0
+
+
+

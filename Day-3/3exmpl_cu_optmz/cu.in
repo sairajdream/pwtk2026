@@ -1,0 +1,33 @@
+&CONTROL
+   calculation     = 'scf'
+/
+
+&SYSTEM
+   ibrav           = 2
+   A               = 3.61
+
+   nat             = 1
+   ntyp            = 1
+   ecutrho         = 240.0
+   ecutwfc         = 30.0
+
+   occupations     = 'smearing'
+   smearing        = 'methfessel-paxton'
+   degauss         = 0.03
+/
+
+&ELECTRONS
+   conv_thr        = 1e-9
+/
+
+ATOMIC_SPECIES 
+   Cu    1.0   Cu.pbe-d-rrkjus.UPF 
+
+ATOMIC_POSITIONS alat
+   Cu       0.000000000000   0.000000000000   0.000000000000
+
+K_POINTS automatic
+   12   12   12   1   1   1 
+
+
+

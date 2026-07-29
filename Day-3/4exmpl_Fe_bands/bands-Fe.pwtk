@@ -1,0 +1,57 @@
+#****e* 4.3 Workflow Examples/36c-bands-Fe
+# DESCRIPTION
+#
+# This example shows how to calculate and plot spaghetti BAND
+# structure using the ::pwtk::bands_run workflow.
+#
+# The structure considered is ferromagnetic bulk Fe.
+#
+# EXAMPLE SOURCE FILE
+#    href:bands-Fe.pwtk
+#
+# SOURCE
+
+
+# load the pw.x input data
+load_fromPWI Fe.in
+#import Fe.pwtk
+SYSTEM { ecutwfc = 30 ecutrho = 240 occupations = 'smearing'  smearing = 'm-v'  degauss = 1e-2 }
+K_POINTS automatic {8   8   8   1   1   1}
+# calculate and plot the spaghetti BAND structure with the
+# ::pwtk::bands_run workflow. The usage is:
+#
+#    ::pwtk::bands_run ?OPTIONS? NAME UNIT NKTOT KSPECS
+#
+# Options:
+# * -scf       ... requests pw.x SCF calculation
+# * -nscf {16 16 16} ... requests pw.x NSCF calculation with denser 16x16x16 non-shifted k-mesh
+# * -preserve  ... preserve the 'outdir', i.e., make the BANDS calculations in the outdir copy
+# * -dos       ... calculate and plot total DOS alongside spaghetti BAND structure
+# * -intdos    ... plot also integrated DOS
+#
+# For other options, see ::pwtk::plot
+
+DOS { bz_sum = 'tetrahedra_opt'  DeltaE = 0.01 }; # minimal input for dos.x
+
+bands_run -scf -nscf {16 16 16} -preserve -dos -intdos -yr -10:15 -yt -10,5 -my 5 -xr -3:3 -t win Fe crystal 100 {
+   0.00     0.00     0.00     Γ
+  -0.50     0.50     0.50     H
+   0.00     0.50     0.00     N
+   0.25     0.75     0.25     P
+   0.00     0.00     0.00     Γ
+}
+
+# plot the spaghetti BAND structure with the ::pwtk::bands_plot command
+# (spaghetti are plotted into a PNG image, -t png)
+#
+# ::pwtk::bands_plot accepts the same options and arguments as ::pwtk::bands_run
+
+bands_plot -scf -nscf {16 16 16} -dos -intdos -yr -10:15 -yt -10,5 -my 5 -xr -2:2 -t png -v Fe crystal 100 {
+   0.00     0.00     0.00     Γ
+  -0.50     0.50     0.50     H
+   0.00     0.50     0.00     N
+   0.25     0.75     0.25     P
+   0.00     0.00     0.00     Γ
+}
+
+#******

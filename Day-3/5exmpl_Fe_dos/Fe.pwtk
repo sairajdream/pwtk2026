@@ -1,0 +1,38 @@
+CONTROL {
+    calculation = 'scf'
+    outdir      = './fe'
+    pseudo_dir  = './pseudo'
+}
+
+SYSTEM {
+    ibrav       = 3
+    A           = 2.87
+
+    nat         = 1
+    ntyp        = 1
+    nbnd        = 8
+    
+    ecutrho     = 240.0
+    ecutwfc     = 30.0
+
+    occupations = 'tetrahedra'
+
+    nspin = 2
+    starting_magnetization(Fe) = 1.0
+}
+
+ELECTRONS {
+    conv_thr = 1e-9
+}
+
+ATOMIC_SPECIES {
+    Fe  1.0  Fe.pbe-nd-rrkjus.UPF
+}
+
+ATOMIC_POSITIONS alat {
+    Fe 0.0 0.0 0.0
+}
+
+K_POINTS automatic {
+    8 8 8   1 1 1
+}
