@@ -1,0 +1,32 @@
+#****e* 4.3 Workflow Examples/34-bader-OAl
+# DESCRIPTION
+#
+# This example shows how to calculate bader charges. It requires the
+# 'bader' program (https://theory.cm.utexas.edu/henkelman/code/bader/).
+#
+# The structure considered is a three-layer slab of O/Al(001)-2x2.
+#
+# EXAMPLE SOURCE FILE
+#    href:bader-OAl.pwtk
+#
+# SOURCE
+
+
+# load the href:scf.OAl.in pw.x input file with ::pwtk::pwi::load_fromPWI
+load_fromPWI OAl.in
+
+
+# Bader charges are calculated with the ::pwtk::pw_pp_bader workflow,
+# consisting of pw.x -> pp.x -> bader calculations.
+#
+# Beware that Bader charges require high 'ecutrho', 1000 Ry is a good
+# choice but here, we use 500 Ry to speed up.
+#
+# The used options "-e 500 -p 0" are equivalent to:
+# SYSTEM { ecutrho = 500 }; INPUTPP { plot_num = 0 }.
+#
+# The ::pwtk::pw_pp_bader defaults are "-e 1000 -p 17".
+
+pw_pp_bader -e 500 -p 0  bader.OAl001-2x2
+
+#******

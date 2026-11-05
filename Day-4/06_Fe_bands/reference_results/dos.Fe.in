@@ -1,0 +1,8 @@
+ &DOS
+   DeltaE = 0.01
+   bz_sum = 'tetrahedra_opt'
+   fildos = 'Fe.dos'
+   outdir = './fe'
+ /
+
+

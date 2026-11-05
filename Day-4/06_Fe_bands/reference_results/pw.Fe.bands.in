@@ -1,0 +1,41 @@
+ &CONTROL
+   calculation = 'bands'
+   outdir      = '/home/sai/Documents/GitHub/old_pwtk/Day-3/4exmpl_Fe_bands/fe.bands'
+   pseudo_dir  = '/home/sai/espresso/pseudo'
+ /
+
+ &SYSTEM
+   A                         = 2.87
+   degauss                   = 1e-2
+   ecutrho                   = 240
+   ecutwfc                   = 30
+   ibrav                     = 3
+   nat                       = 1
+   nbnd                      = 8
+   nspin                     = 2
+   ntyp                      = 1
+   occupations               = 'smearing'
+   smearing                  = 'm-v'
+   starting_magnetization(1) = 1.0
+ /
+
+ &ELECTRONS
+   conv_thr = 1e-9
+ /
+
+ATOMIC_SPECIES 
+    Fe  1.0  Fe.pbe-nd-rrkjus.UPF
+
+ATOMIC_POSITIONS alat
+  Fe       0.000000000000   0.000000000000   0.000000000000
+
+K_POINTS crystal_b
+  5 
+   0.0    0.0    0.0   33 
+   -0.5    0.5    0.5   23 
+   0.0    0.5    0.0   16 
+   0.25    0.75    0.25   28 
+   0.0    0.0    0.0   0 
+
+
+

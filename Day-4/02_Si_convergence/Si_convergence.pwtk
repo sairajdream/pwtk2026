@@ -1,0 +1,80 @@
+# =====================================================================
+# Convergence tests for Si with PWTK
+#   Run:  pwtk Si_convergence.pwtk
+#
+# Each scan is wrapped in input_pushpop { ... } so it starts from the
+# ORIGINAL Si.in values and changes only one parameter at a time.
+# 'restart on' = if you re-run the script, finished calculations are skipped.
+# =====================================================================
+
+set NAME Si
+
+load_fromPWI $NAME.in
+restart on
+
+# ---------------------------------------------------------------------
+# 1) k-point convergence:  k x k x k = 4, 8, 12, 16, 20
+# ---------------------------------------------------------------------
+input_pushpop {
+    scanpar k [seq 4 4 20] {
+        K_POINTS automatic "$k $k $k  1 1 1"
+        write k.$NAME.dat [pwo_totene [runPW scf.$NAME.k$k]]
+    }
+}
+
+plot -t png \
+     -title {"$NAME: k-point convergence" font "Helvetica,14"} \
+     -xl "k  (k x k x k mesh)" \
+     -yl "Total energy (Ry)" \
+     -yf %.4f \
+     k.$NAME.dat
+
+# ---------------------------------------------------------------------
+# 2) ecutwfc convergence for dual = ecutrho/ecutwfc = 4, 8, 12
+# ---------------------------------------------------------------------
+set datList {}
+foreach dual {4 8 12} {
+    set dat ecut.$NAME.dual$dual.dat
+    input_pushpop {
+        scanpar ecut [seq 25 5 45] {
+            SYSTEM "ecutwfc = $ecut
+                    ecutrho = $ecut*$dual"
+            write $dat [pwo_totene [runPW scf.$NAME.e$ecut.d$dual]]
+        }
+    }
+    lappend datList $dat
+}
+
+plot -t png \
+     -title {"$NAME: ecutwfc and dual convergence" font "Helvetica,14"} \
+     -xl "ecutwfc (Ry)" \
+     -yl "Total energy (Ry)" \
+     -yf %.3f \
+     {*}$datList
+
+# ---------------------------------------------------------------------
+# 3) smearing type x degauss x k-mesh
+# ---------------------------------------------------------------------
+array set data {}
+foreach k {4 8 12 16} {
+    foreach smearing {gauss m-p m-v} {
+        set dat $smearing.$NAME.k$k.dat
+        input_pushpop {
+            scanpar degauss {0.01 0.03 0.06 0.09} {
+                SYSTEM "occupations = 'smearing'
+                        smearing = '$smearing'
+                        degauss  = $degauss"
+                K_POINTS automatic "$k $k $k  1 1 1"
+                write $dat [pwo_totene [runPW scf.$NAME.d$degauss.$smearing.k$k]]
+            }
+        }
+        lappend data($smearing) $dat
+    }
+}
+
+multiplot -t png \
+          -title {"$NAME: smearing and degauss" font "Helvetica,14"} \
+          -xl "degauss (Ry)" \
+          -yl "Total energy (Ry)" \
+          -yf %.3f \
+          $data(gauss) $data(m-p) $data(m-v)

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02: Si convergence tests</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d2433;--muted:#5b6475;--accent:#1f6feb;--code:#f1efe9;--border:#dcd8cf;--th:#ebe7de;--card:#ffffff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14171c;--fg:#e4e7ec;--muted:#9aa3b2;--accent:#6ea8fe;--code:#1d2229;--border:#313843;--th:#232a34;--card:#191d23}}
+:root[data-theme="dark"]{--bg:#14171c;--fg:#e4e7ec;--muted:#9aa3b2;--accent:#6ea8fe;--code:#1d2229;--border:#313843;--th:#232a34;--card:#191d23}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;max-width:940px;margin:0 auto;padding:28px 16px 80px}
+nav.crumb{font-size:.9em;color:var(--muted);margin-bottom:8px}
+h1{font-size:1.85em;line-height:1.25;margin:.2em 0 .8em;padding-bottom:.35em;border-bottom:3px solid var(--accent)}
+h2{font-size:1.35em;margin:2em 0 .6em;padding-bottom:.25em;border-bottom:1px solid var(--border)}
+h3{font-size:1.1em;margin:1.5em 0 .5em}
+p,ul,ol{margin:.6em 0}
+li{margin:.25em 0}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:ui-monospace,"DejaVu Sans Mono",Menlo,Consolas,monospace;font-size:.88em;background:var(--code);border:1px solid var(--border);border-radius:4px;padding:.08em .35em;white-space:nowrap}
+pre{background:var(--code);border:1px solid var(--border);border-radius:8px;padding:12px 16px;overflow-x:auto;line-height:1.5;margin:.9em 0}
+pre code{background:none;border:0;padding:0;white-space:pre;font-size:.9em}
+.tablewrap{overflow-x:auto;margin:1em 0}
+table{border-collapse:collapse;width:100%;background:var(--card);font-size:.95em}
+th,td{border:1px solid var(--border);padding:7px 11px;text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:600}
+td code{white-space:nowrap}
+blockquote{margin:1em 0;padding:.6em 1em;border-left:4px solid #d29922;background:var(--code);border-radius:0 6px 6px 0}
+blockquote p{margin:.2em 0}
+img{display:block;max-width:100%;height:auto;margin:1em auto;border:1px solid var(--border);border-radius:6px;background:#fff}
+hr{border:0;border-top:1px solid var(--border);margin:2em 0}
+@media (max-width:600px){body{font-size:15px}h1{font-size:1.5em}}
+</style>
+</head>
+<body>
+<nav class="crumb"><a href="../README.html">&larr; All examples</a></nav>
+<h1>02: Convergence tests for bulk Si</h1>
+<p><strong>Goal:</strong> find converged values of <strong>k-points</strong>, <strong>ecutwfc</strong> and <strong>ecutrho (dual)</strong>, and see how <strong>smearing/degauss</strong> affect the total energy.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Si.in</code></td>
+<td>Starting pw.x input (loaded with <code>load_fromPWI</code>)</td>
+</tr>
+<tr>
+<td><code>Si_convergence.pwtk</code></td>
+<td>Three automated scans and their plots</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Run</h2>
+<pre><code class="language-bash">pwtk Si_convergence.pwtk
+</code></pre>
+<p>The script runs about <strong>68 pw.x calculations</strong>. Thanks to <code>restart on</code>, you can stop it with <code>Ctrl+C</code> and run it again: finished runs are skipped.
+Each scan is inside <code>input_pushpop { }</code>, so it starts from the original <code>Si.in</code> values and changes <strong>one parameter at a time</strong>.</p>
+<h2>What the script does</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Scan</th>
+<th>Varies</th>
+<th>Output data</th>
+<th>Plot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>k = 4, 8, 12, 16, 20 (k×k×k mesh)</td>
+<td><code>k.Si.dat</code></td>
+<td><code>k.Si.png</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>ecutwfc = 25 to 45 Ry for dual = 4, 8, 12</td>
+<td><code>ecut.Si.dual*.dat</code></td>
+<td><code>ecut.Si.dual4.png</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>degauss = 0.01 to 0.09 for gauss / m-p / m-v at k = 4 to 16</td>
+<td><code>gauss.Si.k*.dat</code>, ...</td>
+<td>multiplot <code>*.png</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Each <code>.dat</code> file has two columns: <em>parameter</em>, <em>total energy (Ry)</em>.</p>
+<h2>Result analysis</h2>
+<ol>
+<li><strong>k-points:</strong> from <code>k.Si.dat</code>, find the smallest k for which the energy changes by less than <strong>1 mRy</strong> (0.001 Ry) compared with the next k.</li>
+<li><strong>ecutwfc:</strong> find the cutoff where the energy is converged to about 1 mRy/atom. Does dual = 4 or 8 matter? (Hint: dual 4 is enough for norm-conserving pseudopotentials; ultrasoft ones need 8 to 12.)</li>
+<li><strong>Smearing:</strong> the energy depends on degauss. Which method (gauss, m-p, m-v) depends on degauss the least?</li>
+<li><strong>Si is a semiconductor</strong> with a norm-conserving (<code>pz-vbc</code>) pseudopotential. Expect fast k-convergence (about 8×8×8), insensitivity to dual, and <strong>almost no effect of smearing</strong>, because there are no states at the Fermi level. Smearing is switched on only in scan 3, to show this.</li>
+</ol>
+<p>Quick table of all runs: <code>bash ../qejob_info.sh</code></p>
+</body>
+</html>

@@ -1,0 +1,7 @@
+ &BANDS
+   filband        = 'Fe.dw.dat'
+   outdir         = '/home/sai/Documents/GitHub/old_pwtk/Day-3/4exmpl_Fe_bands/fe.bands'
+   spin_component = 2
+ /
+
+

@@ -1,0 +1,29 @@
+#****e* 4.3 Workflow Examples/350-dos-Fe
+# DESCRIPTION
+#
+# This example shows how to calculate and plot total DOS. The structure
+# considered is a bulk Fe.
+#
+# EXAMPLE SOURCE FILE
+#    href:dos-Fe.pwtk
+#
+# SOURCE
+
+# the pw.x input data for Fe-bulk
+import Fe.pwtk
+
+# basic input data for dos.x
+
+DOS {
+    DeltaE  = 0.05
+}
+
+# calculate and plot the DOS using ::pwtk::dos_run
+#
+# Options:
+# * -scf       ... requests pw.x SCF calculation
+# * -nscf {16 16 16} ... requests pw.x NSCF calculation with denser 16x16x16 non-shifted k-mesh
+ 
+dos_run -scf -nscf {16 16 16} Fe
+
+#******

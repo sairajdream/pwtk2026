@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 5: Automated DFT with PWTK</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d2433;--muted:#5b6475;--accent:#1f6feb;--code:#f1efe9;--border:#dcd8cf;--th:#ebe7de;--card:#ffffff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14171c;--fg:#e4e7ec;--muted:#9aa3b2;--accent:#6ea8fe;--code:#1d2229;--border:#313843;--th:#232a34;--card:#191d23}}
+:root[data-theme="dark"]{--bg:#14171c;--fg:#e4e7ec;--muted:#9aa3b2;--accent:#6ea8fe;--code:#1d2229;--border:#313843;--th:#232a34;--card:#191d23}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;max-width:940px;margin:0 auto;padding:28px 16px 80px}
+nav.crumb{font-size:.9em;color:var(--muted);margin-bottom:8px}
+h1{font-size:1.85em;line-height:1.25;margin:.2em 0 .8em;padding-bottom:.35em;border-bottom:3px solid var(--accent)}
+h2{font-size:1.35em;margin:2em 0 .6em;padding-bottom:.25em;border-bottom:1px solid var(--border)}
+h3{font-size:1.1em;margin:1.5em 0 .5em}
+p,ul,ol{margin:.6em 0}
+li{margin:.25em 0}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:ui-monospace,"DejaVu Sans Mono",Menlo,Consolas,monospace;font-size:.88em;background:var(--code);border:1px solid var(--border);border-radius:4px;padding:.08em .35em;white-space:nowrap}
+pre{background:var(--code);border:1px solid var(--border);border-radius:8px;padding:12px 16px;overflow-x:auto;line-height:1.5;margin:.9em 0}
+pre code{background:none;border:0;padding:0;white-space:pre;font-size:.9em}
+.tablewrap{overflow-x:auto;margin:1em 0}
+table{border-collapse:collapse;width:100%;background:var(--card);font-size:.95em}
+th,td{border:1px solid var(--border);padding:7px 11px;text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:600}
+td code{white-space:nowrap}
+blockquote{margin:1em 0;padding:.6em 1em;border-left:4px solid #d29922;background:var(--code);border-radius:0 6px 6px 0}
+blockquote p{margin:.2em 0}
+img{display:block;max-width:100%;height:auto;margin:1em auto;border:1px solid var(--border);border-radius:6px;background:#fff}
+hr{border:0;border-top:1px solid var(--border);margin:2em 0}
+@media (max-width:600px){body{font-size:15px}h1{font-size:1.5em}}
+</style>
+</head>
+<body>
+
+<p><strong>Hands-on session: 8 examples.</strong></p>
+<p>Every example works the same way:</p>
+<pre><code class="language-bash">cd 0X_folder_name
+pwtk  &lt;script&gt;.pwtk
+</code></pre>
+<p>Each folder has its own <code>README.md</code> / <code>README.html</code> with the exact command,
+what the script does, which files it produces, and how to read the results.</p>
+<hr />
+<h2>0. Before you start</h2>
+<h3>0.1 Aliases and PATH (only once)</h3>
+<pre><code class="language-bash">echo &quot;alias xi='xcrysden --pwi'&quot;  &gt;&gt; ~/.bashrc     # view a pw.x input
+echo &quot;alias xo='xcrysden --pwo'&quot;  &gt;&gt; ~/.bashrc     # view a pw.x output
+echo &quot;alias xsf='xcrysden --xsf'&quot; &gt;&gt; ~/.bashrc     # view an XSF file
+echo 'export PATH=&quot;$PATH:$HOME/espresso/pwtk-3.2&quot;' &gt;&gt; ~/.bashrc   # 'pwtk' command
+bash        # reload (or open a new terminal)
+</code></pre>
+<blockquote>
+<p>Be careful when you edit <code>~/.bashrc</code>. A mistake there can break your shell.
+To edit it by hand, run <code>vim ~/.bashrc</code>, make the change, then type <code>:wq</code> to save and quit.</p>
+</blockquote>
+<h3>0.2 One global PWTK configuration: <code>~/.pwtk/pwtk.tcl</code></h3>
+<p>You do <strong>not</strong> need to set <code>pseudo_dir</code> or the path to <code>pw.x</code> in the examples.
+Everything comes from the one PWTK configuration file:</p>
+<pre><code class="language-bash">cat ~/.pwtk/pwtk.tcl
+</code></pre>
+<p>The important lines are:</p>
+<pre><code class="language-tcl">prefix      &quot;mpirun -np 2&quot;                    ;# run QE on 2 MPI processes (4 physical cores)
+bin_dir     $env(HOME)/espresso/qe6.7/bin/    ;# where pw.x, pp.x, dos.x ... live
+pseudo_dir  $env(HOME)/espresso/pseudo        ;# where the .UPF files live
+outdir_prefix  /tmp/QE                        ;# scratch (when outdir is not set)
+</code></pre>
+<h3>0.3 Check the pseudopotentials</h3>
+<p>All examples need these files in <code>~/espresso/pseudo</code>:</p>
+<hr />
+<h2>1. Examples</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Folder</th>
+<th>Command</th>
+<th>What you learn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td><a href="01_Si_scf_pwx_vs_pwtk/README.html"><code>01_Si_scf_pwx_vs_pwtk</code></a></td>
+<td><code>pw.x</code> and <code>pwtk Si_scf.pwtk</code></td>
+<td>Same SCF run with plain pw.x and with PWTK</td>
+</tr>
+<tr>
+<td>02</td>
+<td><a href="02_Si_convergence/README.html"><code>02_Si_convergence</code></a></td>
+<td><code>pwtk Si_convergence.pwtk</code></td>
+<td>k-points, ecutwfc and dual scans with plots</td>
+</tr>
+<tr>
+<td>03</td>
+<td><a href="03_Cu_convergence/README.html"><code>03_Cu_convergence</code></a></td>
+<td><code>pwtk Cu_convergence.pwtk</code></td>
+<td>The same scans for a metal, plus smearing</td>
+</tr>
+<tr>
+<td>04</td>
+<td><a href="04_Fe_dos/README.html"><code>04_Fe_dos</code></a></td>
+<td><code>pwtk Fe_dos.pwtk</code></td>
+<td>SCF, NSCF and dos.x: spin-polarised DOS</td>
+</tr>
+<tr>
+<td>05</td>
+<td><a href="05_Fe_pdos/README.html"><code>05_Fe_pdos</code></a></td>
+<td><code>pwtk Fe_pdos.pwtk</code></td>
+<td>projwfc.x: projected DOS (s, d, t2g/eg)</td>
+</tr>
+<tr>
+<td>06</td>
+<td><a href="06_Fe_bands/README.html"><code>06_Fe_bands</code></a></td>
+<td><code>pwtk Fe_bands.pwtk</code></td>
+<td>Band structure next to the DOS</td>
+</tr>
+<tr>
+<td>07</td>
+<td><a href="07_OAl_bader/README.html"><code>07_OAl_bader</code></a></td>
+<td><code>pwtk OAl_bader.pwtk</code></td>
+<td>Bader charges for O on Al(001)</td>
+</tr>
+<tr>
+<td>08</td>
+<td><a href="08_OAl_charge_difference/README.html"><code>08_OAl_charge_difference</code></a></td>
+<td><code>pwtk OAl_difden.pwtk</code></td>
+<td>Relaxation, then the charge-density difference Δn(r)</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>2. General workflow for each example</h2>
+<ol>
+<li><code>cd</code> into the folder and read its <code>README</code>.</li>
+<li>Open the input (<code>*.in</code> or <code>*.pwtk</code>) and find the parameters the README mentions.</li>
+<li>Run <code>pwtk &lt;script&gt;.pwtk</code>.</li>
+<li>Look at the results: <code>*.png</code> / <code>*.pdf</code> plots, <code>*.dat</code> tables, and <code>*.out</code> files.</li>
+<li>Answer the "Result analysis" questions in the README.</li>
+</ol>
+<h3>Useful helpers</h3>
+<pre><code class="language-bash">bash ../qejob_info.sh        # table of energy, cutoffs, k-points, magnetisation and wall time for every *.out file here
+grep ! *.out                 # final total energies
+grep &quot;Fermi&quot; *.out           # Fermi energies
+xo  scf.out                  # view the structure from an output file
+</code></pre>
+<p><code>restart on</code> is set in the convergence scripts. If you re-run a script,
+calculations that already finished are skipped, so it is safe to start again.</p>
+<hr />
+<h2>3. Troubleshooting</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pwtk: command not found</code></td>
+<td>Do step 0.1, or use the full path <code>~/espresso/pwtk-3.2/pwtk</code></td>
+</tr>
+<tr>
+<td><code>Error reading pseudo</code> / file not found</td>
+<td>Do step 0.3</td>
+</tr>
+<tr>
+<td><code>bader: command not found</code> (Example 07)</td>
+<td>Install the Henkelman <code>bader</code> program and put it in your <code>PATH</code></td>
+</tr>
+<tr>
+<td>Plot window closes or does not appear</td>
+<td>Look at the <code>*.png</code> / <code>*.pdf</code> files that PWTK writes in the folder</td>
+</tr>
+<tr>
+<td>Want to start from scratch</td>
+<td>Delete the generated <code>*.in</code>, <code>*.out</code> and <code>*.dat</code> files (keep the original inputs)</td>
+</tr>
+</tbody>
+</table></div>
+<p>PWTK documentation: <a href="https://pwtk.ijs.si">https://pwtk.ijs.si</a>. </p>
+</body>
+</html>

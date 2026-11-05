@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)https://pwtk.ijs.si/guide.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="./PWTK_ A Short Guide_files/github-markdown.css">
+    <title>PWTK: A Short Guide</title>
+    <style>
+      .markdown-body {
+          box-sizing: border-box;
+          min-width: 200px;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 45px;
+      }
+
+      @media (max-width: 767px) {
+          .markdown-body {
+              padding: 15px;
+          }
+      }
+      
+            code{white-space: pre-wrap;}
+            span.smallcaps{font-variant: small-caps;}
+            div.columns{display: flex; gap: min(4vw, 1.5em);}
+            div.column{flex: auto; overflow-x: auto;}
+            div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+            /* The extra [class] is a hack that increases specificity enough to
+                   override a similar rule in reveal.js */
+            ul.task-list[class]{list-style: none;}
+            ul.task-list li input[type="checkbox"] {
+                font-size: inherit;
+                width: 0.8em;
+                margin: 0 0.8em 0.2em -1.6em;
+                vertical-align: middle;
+            }
+            .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+            /* CSS for syntax highlighting */
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+                div.sourceCode { overflow: auto; }
+            }
+            @media print {
+                pre > code.sourceCode { white-space: pre-wrap; }
+                pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+            { counter-reset: source-line 0; }
+            pre.numberSource code > span
+            { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+            { content: counter(source-line);
+              position: relative; left: -1em; text-align: right; vertical-align: baseline;
+              border: none; display: inline-block;
+              -webkit-touch-callout: none; -webkit-user-select: none;
+              -khtml-user-select: none; -moz-user-select: none;
+              -ms-user-select: none; user-select: none;
+              padding: 0 4px; width: 4em;
+              color: #aaaaaa;
+            }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+            {   }
+            @media screen {
+                pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { color: #008000; } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { color: #008000; font-weight: bold; } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */          </style>
+  </head>
+
+  <body class="markdown-body">
+    <a href="http://pwtk.ijs.si/" style="margin-bottom:0;">
+      <img src="./PWTK_ A Short Guide_files/pwtk-title.png" style="margin-bottom:0;">
+    </a>
+
+    <h1>A Short Guide</h1>
+
+    <table>
+      <tbody><tr>
+        <td>
+          <b>Table of contents</b>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <nav id="TOC" role="doc-toc">
+            <ul>
+            <li><a href="https://pwtk.ijs.si/guide.html#introduction" id="toc-introduction">Introduction</a>
+            <ul>
+            <li><a href="https://pwtk.ijs.si/guide.html#what-is-pwtk" id="toc-what-is-pwtk">What is
+            PWTK</a></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#pwtk-features" id="toc-pwtk-features">PWTK
+            features</a></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#simple-example" id="toc-simple-example">Simple
+            example</a></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#syntax-of-the-pwtk-scripts" id="toc-syntax-of-the-pwtk-scripts">Syntax of the PWTK
+            scripts</a></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#example-running-multiple-calculations" id="toc-example-running-multiple-calculations">Example:
+            running multiple calculations</a></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#list-of-supported-quantum-espresso-programs" id="toc-list-of-supported-quantum-espresso-programs">List of
+            supported Quantum ESPRESSO programs</a></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#how-to-run-unsupported-programs-with-pwtk" id="toc-how-to-run-unsupported-programs-with-pwtk">How to
+            run unsupported programs with PWTK</a></li>
+            </ul></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#input-data-stacking" id="toc-input-data-stacking">Input data stacking</a></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#customizing-pwtk" id="toc-customizing-pwtk">Customizing PWTK</a>
+            <ul>
+            <li><a href="https://pwtk.ijs.si/guide.html#the-main-configuration-file-.pwtkpwtk.tcl" id="toc-the-main-configuration-file-.pwtkpwtk.tcl">The main
+            configuration file: ~/.pwtk/pwtk.tcl</a></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#incomplete-list-of-configuration-files" id="toc-incomplete-list-of-configuration-files">Incomplete
+            list of configuration files</a></li>
+            </ul></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#pwtk-support-for-hpc-schedulers" id="toc-pwtk-support-for-hpc-schedulers">PWTK support for
+            HPC schedulers</a></li>
+            <li><a href="https://pwtk.ijs.si/guide.html#math-parser" id="toc-math-parser">Math
+            parser</a>
+            <ul>
+            <li><a href="https://pwtk.ijs.si/guide.html#list-of-predefined-constants" id="toc-list-of-predefined-constants">List of predefined
+            constants</a></li>
+            </ul></li>
+            </ul>
+          </nav>
+        </td>
+      </tr>
+    </tbody></table>
+
+    <h2 id="introduction">Introduction</h2>
+    <h3 id="what-is-pwtk">What is PWTK</h3>
+    <p><a href="http://pwtk.ijs.si/">PWTK</a> stands for
+    <strong>PW</strong>scf
+    <strong>T</strong>ool<strong>K</strong>it.</p>
+    <p><a href="http://pwtk.ijs.si/">PWTK</a> is a <a href="https://www.tcl.tk/">Tcl</a> scripting interface for <a href="https://www.quantum-espresso.org/">Quantum ESPRESSO</a> (<a href="https://www.quantum-espresso.org/">QE</a>), aiming to provide
+    a flexible and productive framework. With <a href="http://pwtk.ijs.si/">PWTK</a>, one can automate calculations
+    and glue together different computational tasks.</p>
+    <p><em>(<a href="http://pwtk.ijs.si/">PWTK</a>, standing for PWscf
+    ToolKit, got its name because it initially supported only the PWscf
+    subset of <a href="https://www.quantum-espresso.org/">Quantum
+    ESPRESSO</a> programs. Moreover, the name “Quantum ESPRESSO” did not
+    yet exist when the PWTK project was initiated.)</em></p>
+    <h3 id="pwtk-features">PWTK features</h3>
+    <p>Among the <a href="http://pwtk.ijs.si/">PWTK</a> features
+    are:</p>
+    <ul>
+    <li>assignment of input data on the fly</li>
+    <li>data retrieval functions <span style="font-size: 90%;">(loading
+    from input files and retrieving from output files)</span></li>
+    <li>easy plotting of results</li>
+    <li>workflows <span style="font-size: 90%;">(charge density
+    differences, flexible framework for PDOS calculations, automated
+    lattice parameter search, automated energy-convergence testing of
+    pseudopotentials…)</span></li>
+    <li>support for job schedulers on HPC machines</li>
+    <li>asynchronous parallel execution of scripts</li>
+    <li>stacking of input data</li>
+    <li>extensible and hierarchical configuration <span style="font-size: 90%;"> (including specification of binaries,
+    directories, scheduler configurations…)</span></li>
+    <li>interactive prompt <span style="font-size: 90%;">(useful for
+    querying and testing)</span></li>
+    <li>math-parser</li>
+    <li>…</li>
+    </ul>
+    <h3 id="simple-example">Simple example</h3>
+    <p>Here is a comparison between the <strong>pw.x</strong> input file
+    and the corresponding <a href="http://pwtk.ijs.si/">PWTK</a>
+    script:</p>
+    <table>
+    <tbody><tr>
+    <td>
+    <strong>pw.x</strong> input file: <code>scf.Si.in</code>
+    </td>
+    <td>
+    <a href="http://pwtk.ijs.si/">PWTK</a> script file:
+    <code>Si.pwtk</code>
+    </td>
+    </tr>
+    <tr valign="top">
+    <td>
+    <pre><code> &amp;CONTROL
+  calculation = 'scf'
+       outdir = 'Si_example/'
+   pseudo_dir = '/opt/espresso/pseudo'
+ /
+
+ &amp;SYSTEM
+        ibrav = 2
+    celldm(1) = 10.2
+          nat = 2
+         ntyp = 1
+      ecutwfc = 18.0
+      ecutrho = 72.0
+ /
+
+ &amp;ELECTRONS
+     conv_thr = 1d-7
+ /
+
+ATOMIC_SPECIES
+   Si  1.00  Si.pz-vbc.UPF 
+
+ATOMIC_POSITIONS alat 
+   Si    0.00  0.00  0.00    
+   Si    0.25  0.25  0.25    
+
+K_POINTS automatic 
+   4 4 4   1 1 1 </code></pre>
+    </td>
+    <td>
+    <pre><code>CONTROL {
+  calculation = 'scf' 
+       outdir = 'Si_example/'
+   pseudo_dir = '/opt/espresso/pseudo'
+} 
+ 
+SYSTEM {
+        ibrav = 2
+    celldm(1) = 10.2
+          nat = 2
+         ntyp = 1
+      ecutwfc = 18.0 
+      ecutrho = 4*18.0 
+}
+
+ELECTRONS {
+      conv_thr = 1d-7
+}
+
+ATOMIC_SPECIES {
+   Si  1.00  Si.pz-vbc.UPF 
+}
+ATOMIC_POSITIONS alat {
+   Si    0.0   0.0   0.0
+   Si    1/4   1/4   1/4
+}
+K_POINTS automatic {
+   4 4 4   1 1 1 
+}
+
+runPW scf.Si.in</code></pre>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    This calculation is run as:
+    </td>
+    <td>
+    This calculation is run as:
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <pre><code>pw.x &lt; scf.Si.in &gt; scf.Si.out &amp;</code></pre>
+    </td>
+    <td>
+    <pre><code>pwtk Si.pwtk &gt; Si.log &amp;</code></pre>
+    </td>
+    </tr>
+    </tbody></table>
+    <p>The syntax of the <a href="http://pwtk.ijs.si/">PWTK</a> scripts
+    is similar to <a href="https://www.quantum-espresso.org/">QE</a>
+    input files, but notice that both Fortran namelists (e.g.,
+    <code>&amp;CONTROL</code>) and cards (e.g.,
+    <code>ATOMIC_SPECIES</code>) are enclosed with curly braces (e.g.,
+    <code>CONTROL { ... }</code>).</p>
+    <p>The last line of the above <a href="http://pwtk.ijs.si/">PWTK</a>
+    script, <code>runPW scf.Si.in</code>, requests the
+    <strong>pw.x</strong> calculation. Upon execution, <a href="http://pwtk.ijs.si/">PWTK</a> will:</p>
+    <ul>
+    <li>construct the <code>scf.Si.in</code> input file (the output will
+    be written to <code>scf.Si.out</code>)</li>
+    <li>create the <em>outdir</em> temporary directory if the directory
+    does not exist</li>
+    <li>run the <strong>pw.x</strong> calculation</li>
+    </ul>
+    <p>At a simplistic level of the above example, there is no advantage
+    of using <a href="http://pwtk.ijs.si/">PWTK</a>. However, the
+    advantage becomes evident once multiple calculations are performed
+    (see the <a href="https://pwtk.ijs.si/guide.html#sec:multiple">example</a> below).</p>
+    <h3 id="syntax-of-the-pwtk-scripts">Syntax of the PWTK scripts</h3>
+    <p>The main syntactic attributes of <a href="http://pwtk.ijs.si/">PWTK</a> scripts are:</p>
+    <ul>
+    <li><p><a href="http://pwtk.ijs.si/">PWTK</a> scripts use the <a href="https://www.tcl.tk/">Tcl</a> syntax because, technically, they
+    are <a href="https://www.tcl.tk/">Tcl</a> scripts. Hence, one can use
+    <a href="https://www.tcl.tk/">Tcl</a> commands in <a href="http://pwtk.ijs.si/">PWTK</a> scripts. There are many online
+    resources for learning <a href="https://www.tcl.tk/">Tcl</a>, e.g.,
+    see <a href="https://wiki.tcl-lang.org/page/Tcl+Tutorial+Index">Tcl
+    tutorial</a>, <a href="https://learnxinyminutes.com/docs/tcl/">Learn
+    Tcl in Y minutes</a>, and <a href="https://www.tcl.tk/man/tcl8.6.13/TclCmd/contents.htm">manual
+    pages of Tcl commands</a>.</p></li>
+    <li><p><a href="http://pwtk.ijs.si/">PWTK</a> scripts are
+    <strong>case-sensitive</strong> with namelist and card names written
+    in <strong>uppercase</strong>. For example, using
+    <code>control</code> instead of <code>CONTROL</code> produces the
+    error: <code>invalid command name "control"</code>.</p></li>
+    <li><p>The names of namelist variables are
+    <strong>case-sensitive</strong>. Hence, <code>ibrav</code> and
+    <code>IBRAV</code> are treated as two different namelist
+    variables.</p></li>
+    <li><p>Namelists and cards are bracketed with curly braces
+    (<code>SYSTEM { ... }</code>) or double quotes
+    (<code>SYSTEM " ... "</code>), e.g.:</p>
+    <div class="sourceCode" id="cb5"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb5-1"><a href="https://pwtk.ijs.si/guide.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># namelist with curly braces</span></span>
+<span id="cb5-2"><a href="https://pwtk.ijs.si/guide.html#cb5-2" aria-hidden="true" tabindex="-1"></a>SYSTEM <span class="kw">{</span> </span>
+<span id="cb5-3"><a href="https://pwtk.ijs.si/guide.html#cb5-3" aria-hidden="true" tabindex="-1"></a>   celldm(<span class="dv">1</span>) = <span class="fl">10.2</span> </span>
+<span id="cb5-4"><a href="https://pwtk.ijs.si/guide.html#cb5-4" aria-hidden="true" tabindex="-1"></a>   ! this <span class="ot">is</span> a comment inside the namelist</span>
+<span id="cb5-5"><a href="https://pwtk.ijs.si/guide.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb5-6"><a href="https://pwtk.ijs.si/guide.html#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="https://pwtk.ijs.si/guide.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># namelist with double quotes</span></span>
+<span id="cb5-8"><a href="https://pwtk.ijs.si/guide.html#cb5-8" aria-hidden="true" tabindex="-1"></a>SYSTEM <span class="st">" </span></span>
+<span id="cb5-9"><a href="https://pwtk.ijs.si/guide.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">   celldm(1) = </span><span class="dt">$</span><span class="st">a </span></span>
+<span id="cb5-10"><a href="https://pwtk.ijs.si/guide.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span></code></pre></div>
+    <p>The difference between curly braces and double quotes is that
+    inside double quotes, the variable <code>$a</code> is substituted by
+    its value. In contrast, inside curly braces, <code>$a</code> is
+    treated literally without any substitution.</p></li>
+    <li><p>A namelist variable can be unset by assigning it an empty
+    value, i.e.:</p>
+    <div class="sourceCode" id="cb6"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb6-1"><a href="https://pwtk.ijs.si/guide.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a namelist variable is unset like this:</span></span>
+<span id="cb6-2"><a href="https://pwtk.ijs.si/guide.html#cb6-2" aria-hidden="true" tabindex="-1"></a>SYSTEM <span class="kw">{</span></span>
+<span id="cb6-3"><a href="https://pwtk.ijs.si/guide.html#cb6-3" aria-hidden="true" tabindex="-1"></a>   celldm(<span class="dv">1</span>) = </span>
+<span id="cb6-4"><a href="https://pwtk.ijs.si/guide.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div></li>
+    <li><p>Namelists and cards can be cleared (unset) with the <a href="http://pwtk.ijs.si/src/input_tcl3A3Apwtk3A3Ainput2F3A3Apwtk3A3Ainput3A3Aclear.html">input_clear</a>
+    command, e.g.:</p>
+    <pre><code>input_clear SYSTEM ATOMIC_POSITIONS</code></pre></li>
+    <li><p>Numbers can be specified as mathematical expressions:
+    math-parsing is enabled for all cards and namelist variables of
+    numeric type. Here is an example:</p>
+    <pre><code>SYSTEM { 
+   ecutrho = 12*30.0
+}</code></pre>
+    <p>Beware that such mathematical expressions should not contain
+    spaces (e.g., <code>12 * 30.0</code> is invalid because it is parsed
+    as three fields 12, *, and 30.0).</p></li>
+    <li><p>Indices of <em>ntyp</em>-type array variables, such as
+    <code>starting_magnetization</code>, can be specified with atomic
+    labels:</p>
+    <pre><code>SYSTEM { 
+   starting_magnetization(Fe) = 0.8
+}</code></pre>
+    <p>where <code>Fe</code> is one among atomic species defined in the
+    <code>ATOMIC_SPECIES</code> card. It is <strong>highly recommended
+    to use atomic labels</strong> instead of numeric indices.</p></li>
+    </ul>
+    <p><a name="sec:multiple"></a></p>
+    <h3 id="example-running-multiple-calculations">Example: running
+    multiple calculations</h3>
+    <p><a href="http://pwtk.ijs.si/">PWTK</a> allows (re)assigning
+    namelist variables or the content of cards on the fly, which is
+    useful when performing multiple calculations, where only a few
+    parameters per calculation change.</p>
+    <p>As an example, let us perform a few tests on Si bulk. To this
+    end, we will use the above <a href="https://pwtk.ijs.si/examples/scf.Si.in">scf.Si.si</a> input file. Below is the <a href="http://pwtk.ijs.si/">PWTK</a> script that scans the energy
+    cutoff (<code>ecutwfc</code>), k-point mesh (<code>K_POINTS</code>),
+    and lattice parameter (<code>celldm(1)</code>):</p>
+    <div class="sourceCode" id="cb10"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb10-1"><a href="https://pwtk.ijs.si/guide.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the "load_fromPWI" command loads the pw.x input file</span></span>
+<span id="cb10-2"><a href="https://pwtk.ijs.si/guide.html#cb10-2" aria-hidden="true" tabindex="-1"></a>load_fromPWI scf.Si.in</span>
+<span id="cb10-3"><a href="https://pwtk.ijs.si/guide.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="https://pwtk.ijs.si/guide.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------</span></span>
+<span id="cb10-5"><a href="https://pwtk.ijs.si/guide.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># scan the energy-cuttofs</span></span>
+<span id="cb10-6"><a href="https://pwtk.ijs.si/guide.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------</span></span>
+<span id="cb10-7"><a href="https://pwtk.ijs.si/guide.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># the "scanpar" command loops over a parameter; </span></span>
+<span id="cb10-8"><a href="https://pwtk.ijs.si/guide.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># it is similar to a one-parameter Tcl "foreach" command</span></span>
+<span id="cb10-9"><a href="https://pwtk.ijs.si/guide.html#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="https://pwtk.ijs.si/guide.html#cb10-10" aria-hidden="true" tabindex="-1"></a>scanpar e <span class="kw">{</span><span class="fl">10.0</span> <span class="fl">14.0</span> <span class="fl">18.0</span> <span class="fl">22.0</span><span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb10-11"><a href="https://pwtk.ijs.si/guide.html#cb10-11" aria-hidden="true" tabindex="-1"></a>   <span class="co"># load the new energy cuttofs</span></span>
+<span id="cb10-12"><a href="https://pwtk.ijs.si/guide.html#cb10-12" aria-hidden="true" tabindex="-1"></a>   SYSTEM <span class="st">"ecutwfc = </span><span class="dt">$</span><span class="st">e, ecutrho = 4*</span><span class="dt">$</span><span class="st">e"</span></span>
+<span id="cb10-13"><a href="https://pwtk.ijs.si/guide.html#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="https://pwtk.ijs.si/guide.html#cb10-14" aria-hidden="true" tabindex="-1"></a>   <span class="co"># perform the pw.x calculation (I/O files: scf.Si_e$e.in &amp; scf.Si_e$e.out)</span></span>
+<span id="cb10-15"><a href="https://pwtk.ijs.si/guide.html#cb10-15" aria-hidden="true" tabindex="-1"></a>   runPW scf.Si_e<span class="dt">$e</span></span>
+<span id="cb10-16"><a href="https://pwtk.ijs.si/guide.html#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="https://pwtk.ijs.si/guide.html#cb10-17" aria-hidden="true" tabindex="-1"></a>   <span class="co"># store $e and total energy in the 'ecut.dat' file </span></span>
+<span id="cb10-18"><a href="https://pwtk.ijs.si/guide.html#cb10-18" aria-hidden="true" tabindex="-1"></a>   write ecut.dat <span class="kw">[</span>pwo_totene scf.Si_e<span class="dt">$e</span>.out<span class="kw">]</span></span>
+<span id="cb10-19"><a href="https://pwtk.ijs.si/guide.html#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb10-20"><a href="https://pwtk.ijs.si/guide.html#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the result</span></span>
+<span id="cb10-21"><a href="https://pwtk.ijs.si/guide.html#cb10-21" aria-hidden="true" tabindex="-1"></a>plot<span class="ot"> -xl</span> <span class="st">"ecutwfc (Ry)"</span><span class="ot"> -yl</span> <span class="st">"Total energy (Ry)"</span> ecut.dat</span>
+<span id="cb10-22"><a href="https://pwtk.ijs.si/guide.html#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="https://pwtk.ijs.si/guide.html#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="https://pwtk.ijs.si/guide.html#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co">#-----------------</span></span>
+<span id="cb10-25"><a href="https://pwtk.ijs.si/guide.html#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co"># scan the k-points</span></span>
+<span id="cb10-26"><a href="https://pwtk.ijs.si/guide.html#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co">#-----------------</span></span>
+<span id="cb10-27"><a href="https://pwtk.ijs.si/guide.html#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="https://pwtk.ijs.si/guide.html#cb10-28" aria-hidden="true" tabindex="-1"></a>scanpar k <span class="kw">{</span><span class="dv">2</span> <span class="dv">4</span> <span class="dv">6</span><span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb10-29"><a href="https://pwtk.ijs.si/guide.html#cb10-29" aria-hidden="true" tabindex="-1"></a>   <span class="co"># load new k-points</span></span>
+<span id="cb10-30"><a href="https://pwtk.ijs.si/guide.html#cb10-30" aria-hidden="true" tabindex="-1"></a>   K_POINTS automatic <span class="st">"</span><span class="dt">$</span><span class="st">k </span><span class="dt">$</span><span class="st">k </span><span class="dt">$</span><span class="st">k   1 1 1"</span></span>
+<span id="cb10-31"><a href="https://pwtk.ijs.si/guide.html#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="https://pwtk.ijs.si/guide.html#cb10-32" aria-hidden="true" tabindex="-1"></a>   <span class="co"># perform the pw.x calculation (I/O files: scf.Si_k$k.in &amp; scf.Si_k$k.out)</span></span>
+<span id="cb10-33"><a href="https://pwtk.ijs.si/guide.html#cb10-33" aria-hidden="true" tabindex="-1"></a>   runPW scf.Si_k<span class="dt">$k</span></span>
+<span id="cb10-34"><a href="https://pwtk.ijs.si/guide.html#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-35"><a href="https://pwtk.ijs.si/guide.html#cb10-35" aria-hidden="true" tabindex="-1"></a>   <span class="co"># store $k and total energy into the 'k.dat' file </span></span>
+<span id="cb10-36"><a href="https://pwtk.ijs.si/guide.html#cb10-36" aria-hidden="true" tabindex="-1"></a>   write k.dat <span class="kw">[</span>pwo_totene scf.Si_k<span class="dt">$k</span>.out<span class="kw">]</span></span>
+<span id="cb10-37"><a href="https://pwtk.ijs.si/guide.html#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb10-38"><a href="https://pwtk.ijs.si/guide.html#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the result</span></span>
+<span id="cb10-39"><a href="https://pwtk.ijs.si/guide.html#cb10-39" aria-hidden="true" tabindex="-1"></a>plot<span class="ot"> -xl</span> <span class="st">"K of the (KxKxK) k-point mesh"</span><span class="ot"> -yl</span> <span class="st">"Total energy (Ry)"</span> k.dat</span>
+<span id="cb10-40"><a href="https://pwtk.ijs.si/guide.html#cb10-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-41"><a href="https://pwtk.ijs.si/guide.html#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-42"><a href="https://pwtk.ijs.si/guide.html#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------</span></span>
+<span id="cb10-43"><a href="https://pwtk.ijs.si/guide.html#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="co"># scan the lattice-parameter</span></span>
+<span id="cb10-44"><a href="https://pwtk.ijs.si/guide.html#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------</span></span>
+<span id="cb10-45"><a href="https://pwtk.ijs.si/guide.html#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="https://pwtk.ijs.si/guide.html#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="co"># here, we use the "seq" command, which behaves just like the Unix "seq" command</span></span>
+<span id="cb10-47"><a href="https://pwtk.ijs.si/guide.html#cb10-47" aria-hidden="true" tabindex="-1"></a>scanpar a <span class="kw">[</span>seq <span class="fl">9.2</span> <span class="fl">0.2</span> <span class="fl">10.8</span><span class="kw">]</span> <span class="kw">{</span></span>
+<span id="cb10-48"><a href="https://pwtk.ijs.si/guide.html#cb10-48" aria-hidden="true" tabindex="-1"></a>   <span class="co"># load new celldm(1)</span></span>
+<span id="cb10-49"><a href="https://pwtk.ijs.si/guide.html#cb10-49" aria-hidden="true" tabindex="-1"></a>   SYSTEM <span class="st">" celldm(1) = </span><span class="dt">$</span><span class="st">a "</span></span>
+<span id="cb10-50"><a href="https://pwtk.ijs.si/guide.html#cb10-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-51"><a href="https://pwtk.ijs.si/guide.html#cb10-51" aria-hidden="true" tabindex="-1"></a>   <span class="co"># perform the calculation (I/O files: scf.Si_alat$a.in &amp; scf.Si_alat$a.out)</span></span>
+<span id="cb10-52"><a href="https://pwtk.ijs.si/guide.html#cb10-52" aria-hidden="true" tabindex="-1"></a>   runPW scf.Si_alat<span class="dt">$a</span></span>
+<span id="cb10-53"><a href="https://pwtk.ijs.si/guide.html#cb10-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-54"><a href="https://pwtk.ijs.si/guide.html#cb10-54" aria-hidden="true" tabindex="-1"></a>   <span class="co"># store $a and total energy into the 'alat.dat' file</span></span>
+<span id="cb10-55"><a href="https://pwtk.ijs.si/guide.html#cb10-55" aria-hidden="true" tabindex="-1"></a>   write alat.dat <span class="kw">[</span>pwo_totene scf.Si_alat<span class="dt">$a</span>.out<span class="kw">]</span></span>
+<span id="cb10-56"><a href="https://pwtk.ijs.si/guide.html#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb10-57"><a href="https://pwtk.ijs.si/guide.html#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the result</span></span>
+<span id="cb10-58"><a href="https://pwtk.ijs.si/guide.html#cb10-58" aria-hidden="true" tabindex="-1"></a>plot<span class="ot"> -xl</span> <span class="st">"A lattice paramater (bohr)"</span><span class="ot"> -yl</span> <span class="st">"Total energy (Ry)"</span> alat.dat</span></code></pre></div>
+    <p>Let us save this script into the <code>scan.pwtk</code> file. The
+    script is run from the terminal as follows:</p>
+    <pre><code>pwtk scan.pwtk</code></pre>
+    <h3 id="list-of-supported-quantum-espresso-programs">List of
+    supported Quantum ESPRESSO programs</h3>
+    <p><a href="http://pwtk.ijs.si/">PWTK</a> explicitly supports all <a href="https://www.quantum-espresso.org/">QE</a> executables, which
+    are documented with the <em>INPUT_*.html</em> documentation. To get
+    the list of these executables, enter the <a href="http://pwtk.ijs.si/">PWTK</a> interactive prompt by typing
+    <code>pwtk</code> in the terminal. Then type:</p>
+    <pre><code>report programs</code></pre>
+    <p>which returns the alphabetically sorted list of supported <a href="https://www.quantum-espresso.org/">QE</a> executables and the
+    respective commands for running them (e.g.&nbsp;<a href="http://pwtk.ijs.si/src/runXX_tcl52E32E22E20Run20Supported20Programs2028aka20runCmd292F3A3Apwtk3A3ArunPW.html">runPW</a>
+    for <strong>pw.x</strong>, <a href="http://pwtk.ijs.si/src/runXX_tcl52E32E22E20Run20Supported20Programs2028aka20runCmd292F3A3Apwtk3A3ArunCP.html">runCP</a>
+    for <strong>cp.x</strong>, <a href="http://pwtk.ijs.si/src/runXX_tcl52E32E22E20Run20Supported20Programs2028aka20runCmd292F3A3Apwtk3A3ArunPH.html">runPH</a>
+    for <strong>ph.x</strong>…), i.e.:</p>
+    <pre><code>----------------------------------------------
+ executable             runCmd                 
+----------------------------------------------
+ all_currents.x         runALL_CURRENTS        
+ band_interpolation.x   runBAND_INTERPOLATION  
+ bands.x                runBANDS               
+ bgw2pw.x               runBGW2PW              
+ cp.x                   runCP                 
+ cppp.x                 runCPPP               
+ d3hess.x               runD3HESS             
+ dos.x                  runDOS                
+ dynmat.x               runDYNMAT             
+ hp.x                   runHP                 
+ kcw.x                  runKCW                
+ ld1.x                  runLD1                
+ matdyn.x               runMATDYN             
+ molecularpdos.x        runMOPDOS             
+ neb.x                  runNEB                
+ oscdft_et.x            runOSCDFT_ET          
+ oscdft_pp.x            runOSCDFT_PP          
+ ph.x                   runPH                 
+ postahc.x              runPOSTAHC            
+ pp.x                   runPP                 
+ ppacf.x                runPPACF              
+ pprism.x               runPPRISM             
+ projwfc.x              runPROJWFC            
+ pw.x                   runPW                 
+ pw2bgw.x               runPW2BGW             
+ pw2gw.x                runPW2GW              
+ pw2wannier90.x         runPW2WANNIER90       
+ pwcond.x               runPWCOND             
+ q2r.x                  runQ2R                
+ turbo_davidson.x       runDAVIDSON           
+ turbo_eels.x           runEELS               
+ turbo_lanczos.x        runLANCZOS            
+ turbo_magnon.x         runMAGNON             
+ turbo_spectrum.x       runSPECTRUM
+----------------------------------------------</code></pre>
+    <p>Because there are many <em>runCmd</em> commands, which may be
+    hard to remember, there is also an alternative <a href="http://pwtk.ijs.si/src/runXX_tcl52E32E22E20Run20Supported20Programs2028aka20runCmd292F3A3Apwtk3A3ArunXX.html">runXX</a>
+    command, whose usage is:</p>
+    <blockquote>
+    <p><strong>runXX</strong> <em>program</em> <em>inputName</em></p>
+    </blockquote>
+    <p>where <em>program</em> is the name of the <a href="https://www.quantum-espresso.org/">QE</a> executable. For
+    example, <code>runXX ph.x</code> is equivalent to <a href="http://pwtk.ijs.si/src/runXX_tcl52E32E22E20Run20Supported20Programs2028aka20runCmd292F3A3Apwtk3A3ArunPH.html">runPH</a>.
+    In the first example above, we used:</p>
+    <pre><code>runPW scf.Si.in</code></pre>
+    <p>which is equivalent to:</p>
+    <pre><code>runXX pw.x scf.Si.in</code></pre>
+    <h3 id="how-to-run-unsupported-programs-with-pwtk">How to run
+    unsupported programs with PWTK</h3>
+    <p>It is also possible to run other <a href="https://www.quantum-espresso.org/">QE</a> programs that are
+    not directly supported by <a href="http://pwtk.ijs.si/">PWTK</a>,
+    using the <a href="http://pwtk.ijs.si/src/run_tcl52E32E12E20Run20Programs2028plain20way292F3A3Apwtk3A3Arun.html">run</a>
+    command. But in this case, the input file must exist before the <a href="http://pwtk.ijs.si/src/run_tcl52E32E12E20Run20Programs2028plain20way292F3A3Apwtk3A3Arun.html">run</a>
+    command is called. It can be created in a <a href="http://pwtk.ijs.si/">PWTK</a> script with the <a href="http://pwtk.ijs.si/src/auxil_tclFileUtilities2F3A3Apwtk3A3AwriteFile.html">writeFile</a>
+    command. Here is an example of how to run the <strong>ev.x</strong>
+    executable:</p>
+    <div class="sourceCode" id="cb16"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb16-1"><a href="https://pwtk.ijs.si/guide.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the 'ev.murnaghan.in' file</span></span>
+<span id="cb16-2"><a href="https://pwtk.ijs.si/guide.html#cb16-2" aria-hidden="true" tabindex="-1"></a>writeFile ev.murnaghan.in <span class="kw">{</span></span>
+<span id="cb16-3"><a href="https://pwtk.ijs.si/guide.html#cb16-3" aria-hidden="true" tabindex="-1"></a>   au</span>
+<span id="cb16-4"><a href="https://pwtk.ijs.si/guide.html#cb16-4" aria-hidden="true" tabindex="-1"></a>   fcc</span>
+<span id="cb16-5"><a href="https://pwtk.ijs.si/guide.html#cb16-5" aria-hidden="true" tabindex="-1"></a>   <span class="dv">4</span></span>
+<span id="cb16-6"><a href="https://pwtk.ijs.si/guide.html#cb16-6" aria-hidden="true" tabindex="-1"></a>   Etot-vs-alat.dat</span>
+<span id="cb16-7"><a href="https://pwtk.ijs.si/guide.html#cb16-7" aria-hidden="true" tabindex="-1"></a>   Etot-vs-alat.out</span>
+<span id="cb16-8"><a href="https://pwtk.ijs.si/guide.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb16-9"><a href="https://pwtk.ijs.si/guide.html#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="https://pwtk.ijs.si/guide.html#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># run the ev.x code; the -serial option requests running in a serial mode</span></span>
+<span id="cb16-11"><a href="https://pwtk.ijs.si/guide.html#cb16-11" aria-hidden="true" tabindex="-1"></a>run<span class="ot"> -serial</span> ev.<span class="ot">x</span> ev.murnaghan.in</span></code></pre></div>
+    <p><a name="sec:stacking"></a></p>
+    <h2 id="input-data-stacking">Input data stacking</h2>
+    <p><a href="http://pwtk.ijs.si/">PWTK</a> has an input data stacking
+    mechanism, which is useful when performing multiple calculations.
+    For example, we have a set of default parameters for all
+    calculations, but each calculation requires some input data
+    modification. We do not want a change of input data for a given
+    calculation to affect the input data for subsequent calculations.
+    This feature can be elegantly achieved using the input data stacking
+    mechanism, and for this purpose, <a href="http://pwtk.ijs.si/">PWTK</a> provides the <a href="http://pwtk.ijs.si/src/stack_tclStacking2F3A3Apwtk3A3Ainput3A3Apushpop.html">input_pushpop</a>
+    command. The concept is illustrated below (read the comments):</p>
+    <div class="sourceCode" id="cb17"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb17-1"><a href="https://pwtk.ijs.si/guide.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import a default set of parameters (#0)</span></span>
+<span id="cb17-2"><a href="https://pwtk.ijs.si/guide.html#cb17-2" aria-hidden="true" tabindex="-1"></a>import input-data.pwtk</span>
+<span id="cb17-3"><a href="https://pwtk.ijs.si/guide.html#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="https://pwtk.ijs.si/guide.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1st calculation </span></span>
+<span id="cb17-5"><a href="https://pwtk.ijs.si/guide.html#cb17-5" aria-hidden="true" tabindex="-1"></a>input_pushpop <span class="kw">{</span></span>
+<span id="cb17-6"><a href="https://pwtk.ijs.si/guide.html#cb17-6" aria-hidden="true" tabindex="-1"></a>   <span class="co"># input data was pushed on the stack;</span></span>
+<span id="cb17-7"><a href="https://pwtk.ijs.si/guide.html#cb17-7" aria-hidden="true" tabindex="-1"></a>   <span class="co"># at this point, the input data is the same as in (#0)</span></span>
+<span id="cb17-8"><a href="https://pwtk.ijs.si/guide.html#cb17-8" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb17-9"><a href="https://pwtk.ijs.si/guide.html#cb17-9" aria-hidden="true" tabindex="-1"></a>   ... modify input data <span class="kw">for</span> this calculation (#<span class="dv">1</span>)</span>
+<span id="cb17-10"><a href="https://pwtk.ijs.si/guide.html#cb17-10" aria-hidden="true" tabindex="-1"></a>   ... perform the <span class="dv">1</span>st calculation</span>
+<span id="cb17-11"><a href="https://pwtk.ijs.si/guide.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb17-12"><a href="https://pwtk.ijs.si/guide.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># the input data modifications (#1) were popped away;</span></span>
+<span id="cb17-13"><a href="https://pwtk.ijs.si/guide.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># at this point, the input data is the same as in (#0)</span></span>
+<span id="cb17-14"><a href="https://pwtk.ijs.si/guide.html#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="https://pwtk.ijs.si/guide.html#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 2nd calculation</span></span>
+<span id="cb17-16"><a href="https://pwtk.ijs.si/guide.html#cb17-16" aria-hidden="true" tabindex="-1"></a>input_pushpop <span class="kw">{</span></span>
+<span id="cb17-17"><a href="https://pwtk.ijs.si/guide.html#cb17-17" aria-hidden="true" tabindex="-1"></a>   <span class="co"># input data still the same as in (#0)</span></span>
+<span id="cb17-18"><a href="https://pwtk.ijs.si/guide.html#cb17-18" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb17-19"><a href="https://pwtk.ijs.si/guide.html#cb17-19" aria-hidden="true" tabindex="-1"></a>   ... modify input data <span class="kw">for</span> this calculation (#<span class="dv">2</span>)</span>
+<span id="cb17-20"><a href="https://pwtk.ijs.si/guide.html#cb17-20" aria-hidden="true" tabindex="-1"></a>   ... perform the <span class="dv">2</span>nd calculation</span>
+<span id="cb17-21"><a href="https://pwtk.ijs.si/guide.html#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb17-22"><a href="https://pwtk.ijs.si/guide.html#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co"># at this point, the input data is again the same as in (#0)</span></span></code></pre></div>
+    <p><a name="sec:customizing"></a></p>
+    <h2 id="customizing-pwtk">Customizing PWTK</h2>
+    <p>The <a href="http://pwtk.ijs.si/">PWTK</a> user configuration
+    files are stored in the <code>~/.pwtk/</code> directory. The main
+    configuration file therein is <code>pwtk.tcl</code>. In this file,
+    the following items are typically defined (actually their default
+    values):</p>
+    <ul>
+    <li>specs of how <a href="https://www.quantum-espresso.org/">QE</a>
+    executables are run: these include <a href="http://pwtk.ijs.si/src/pwtk_tcl52E52E20Executions2F3A3Apwtk3A3Aprefix.html">prefix</a>,
+    <a href="http://pwtk.ijs.si/src/pwtk_tcl52E52E20Executions2F3A3Apwtk3A3Apostfix.html">postfix</a>,
+    and the binary directory, where the executables are located (<a href="http://pwtk.ijs.si/src/pwtk_tcl52E42E20Directories20and20Pseudopotentials2F3A3Apwtk3A3Abin5Fdir.html">bin_dir</a>).</li>
+    <li>directory where pseudo-potential files are located (<a href="http://pwtk.ijs.si/src/pwtk_tcl52E42E20Directories20and20Pseudopotentials2F3A3Apwtk3A3Apseudo5Fdir.html">pseudo_dir</a>)
+    and temporary directories (<a href="http://pwtk.ijs.si/src/pwtk_tcl52E42E20Directories20and20Pseudopotentials2F3A3Apwtk3A3Aoutdir.html">outdir</a>,
+    <a href="http://pwtk.ijs.si/src/pwtk_tcl52E42E20Directories20and20Pseudopotentials2F3A3Apwtk3A3Awfcdir.html">wfcdir</a>)</li>
+    <li>extra user-defined stuff</li>
+    </ul>
+    <p>The system configuration files are stored in the
+    <code>$PWTK/config/</code> directory, and <a href="http://pwtk.ijs.si/">PWTK</a> first reads the system
+    configuration files and then the user configuration files, which
+    implies that user configuration has priority over the system
+    configuration.</p>
+    <h3 id="the-main-configuration-file-.pwtkpwtk.tcl">The main
+    configuration file: ~/.pwtk/pwtk.tcl</h3>
+    <p>Here is an example of the <code>~/.pwtk/pwtk.tcl</code> file:</p>
+    <pre><code># ------------------------------------------------------------------------
+# 
+# File: pwtk.tcl -- PWTK main configuration file
+#
+# This is the main configuration file for PWTK. It contains some custom
+# definitions, such as Quantum ESPRESSO executables and alike.
+# ------------------------------------------------------------------------
+
+#
+# LOCATION OF QUANTUM ESPRESSO EXECUTABLES AND
+# HOW TO RUN THEM ...
+# 
+# executables are run as: container prefix bin_dir/program postfix
+
+prefix  mpirun -np 32
+bin_dir $env(HOME)/bin/espresso
+
+# for containers, one may use:
+
+container apptainer exec /path/to/container.sif
+bin_query false
+
+#
+# DEFAULT DIRECTORIES ...
+#
+# N.B. outdir == outdir_prefix/outdir_postfix
+#      wfcdir == wfcdir_prefix/wfcdir_postfix
+
+outdir_prefix /scratch/$env(USER)/QE
+wfcdir_prefix /scratch/$env(USER)/QE
+
+outdir_postfix [pid]
+wfcdir_postfix [pid]
+
+# directory for pseudopotential files (aka pseudo_dir)
+
+pseudo_dir    $env(HOME)/espresso/pseudo</code></pre>
+    <p>In this file, the following data are typically specified:</p>
+    <ul>
+    <li>location of the <a href="https://www.quantum-espresso.org/">QE</a> executables and how
+    to run them</li>
+    <li>default directory for pseudopotentials (<a href="http://pwtk.ijs.si/src/pwtk_tcl52E42E20Directories20and20Pseudopotentials2F3A3Apwtk3A3Apseudo5Fdir.html">pseudo_dir</a>)</li>
+    <li>default locations for temporary directories (<a href="http://pwtk.ijs.si/src/pwtk_tcl52E42E20Directories20and20Pseudopotentials2F3A3Apwtk3A3Aoutdir.html">outdir</a>
+    and <a href="http://pwtk.ijs.si/src/pwtk_tcl52E42E20Directories20and20Pseudopotentials2F3A3Apwtk3A3Awfcdir.html">wfcdir</a>);
+    <a href="http://pwtk.ijs.si/">PWTK</a> inserts their values in the
+    corresponding input files, when those variables are not explicitly
+    defined in the input data specification</li>
+    </ul>
+    <p>Here is a snippet that automatically determines the number of
+    available processors that can be used in
+    <code>~/.pwtk/pwtk.tcl</code>:</p>
+    <div class="sourceCode" id="cb19"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb19-1"><a href="https://pwtk.ijs.si/guide.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> np <span class="kw">[exec</span> nproc<span class="kw">]</span></span>
+<span id="cb19-2"><a href="https://pwtk.ijs.si/guide.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">while</span> <span class="kw">{</span> <span class="kw">[catch</span> <span class="kw">{exec</span> mpirun<span class="ot"> -n</span> <span class="dt">$np</span> echo yes<span class="kw">}]</span> <span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb19-3"><a href="https://pwtk.ijs.si/guide.html#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">set</span> np <span class="kw">[expr</span> <span class="kw">{</span> <span class="dt">$np</span> &gt; <span class="dv">2</span> ? <span class="dt">$np</span> / <span class="dv">2</span> : <span class="dv">1</span> <span class="kw">}]</span></span>
+<span id="cb19-4"><a href="https://pwtk.ijs.si/guide.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb19-5"><a href="https://pwtk.ijs.si/guide.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> <span class="kw">{</span> <span class="dt">$np</span> &gt; <span class="dv">1</span> <span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb19-6"><a href="https://pwtk.ijs.si/guide.html#cb19-6" aria-hidden="true" tabindex="-1"></a>    prefix mpirun<span class="ot"> -n</span> <span class="dt">$np</span></span>
+<span id="cb19-7"><a href="https://pwtk.ijs.si/guide.html#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+    <h3 id="incomplete-list-of-configuration-files">Incomplete list of
+    configuration files</h3>
+    <p>The configuration files that a user should usually copy from the
+    <a href="https://pwtk.ijs.si/config/">$PWTK/config/</a> to <code>~/.pwtk/</code>
+    directory and edit are:</p>
+    <ul>
+    <li><p><a href="https://pwtk.ijs.si/config/pwtk.tcl">pwtk.tcl</a> — the main
+    configuration file (typically edited by each user)</p></li>
+    <li><p><a href="https://pwtk.ijs.si/config/remote.tcl">remote.tcl</a> — configuration
+    file for specifying how to connect to remote machines</p></li>
+    <li><p>configuration files for HPC schedulers, such as:</p>
+    <ul>
+    <li><a href="https://pwtk.ijs.si/config/slurm.tcl">slurm.tcl</a> — configuration file
+    for <a href="https://slurm.schedmd.com/">Slurm</a> batch queuing
+    directives<br>
+    </li>
+    <li><a href="https://pwtk.ijs.si/config/lsf.tcl">lsf.tcl</a> — configuration file for <a href="https://en.wikipedia.org/wiki/IBM_Spectrum_LSF">LSF</a> batch
+    queuing directives</li>
+    <li><a href="https://pwtk.ijs.si/config/pbs.tcl">pbs.tcl</a> — configuration file for <a href="https://en.wikipedia.org/wiki/Portable_Batch_System">PBS</a>
+    batch queuing directives<br>
+    </li>
+    <li><a href="https://pwtk.ijs.si/config/ll.tcl">ll.tcl</a> — configuration file for
+    Load-Leveler batch queuing directives</li>
+    </ul></li>
+    </ul>
+    <p>The following configuration files typically do not require user
+    attention, and relying on system configurations in the
+    <code>$PWTK/config/</code> directory is fine.</p>
+    <ul>
+    <li>configuration files related to input data (e.g., the definition
+    of namelists variables for math-parsing), such as:
+    <ul>
+    <li><a href="https://pwtk.ijs.si/config/pwi.tcl">pwi.tcl</a> (configuration file for
+    handling pw.x input data)</li>
+    <li><a href="https://pwtk.ijs.si/config/cpi.tcl">cpi.tcl</a> (for cp.x input data)</li>
+    <li><a href="https://pwtk.ijs.si/config/nebi.tcl">nebi.tcl</a> (for neb.x input
+    data)</li>
+    <li>etc.</li>
+    </ul></li>
+    <li>configuration files for various workflows, such as:
+    <ul>
+    <li><a href="https://pwtk.ijs.si/config/eos.tcl">eos.tcl</a> (configuration file related
+    to EOS (equation-of-state) workflow)</li>
+    <li><a href="https://pwtk.ijs.si/config/sbco.tcl">sbco.tcl</a> (configuration file for
+    the SBCO workflow)</li>
+    <li><a href="https://pwtk.ijs.si/config/pdos.tcl">pdos.tcl</a> (configuration file for
+    the PDOS utility)</li>
+    <li>etc.</li>
+    </ul></li>
+    <li>configuration files for external software, such as:
+    <ul>
+    <li><a href="https://pwtk.ijs.si/config/viewers.tcl">viewers.tcl</a> (definition of
+    viewers for PDF, PNG, and SVG files)</li>
+    <li><a href="https://pwtk.ijs.si/config/gnuplot.tcl">gnuplot.tcl</a> (configuration file
+    for Gnuplot)</li>
+    </ul></li>
+    </ul>
+    <p><a name="sec:HPC"></a></p>
+    <h2 id="pwtk-support-for-hpc-schedulers">PWTK support for HPC
+    schedulers</h2>
+    <p>HPC machines use job schedulers. Hence, one must provide
+    batch-queuing system-specific instructions (directives) in shell
+    script files, such as the queue’s name, number of processors, etc.
+    Instead of putting such instructions inside each shell script (or <a href="http://pwtk.ijs.si/">PWTK</a> script, if one is using <a href="http://pwtk.ijs.si/">PWTK</a>), the specific queuing
+    directives can be stored in the corresponding <a href="http://pwtk.ijs.si/">PWTK</a> configuration file
+    (e.g.&nbsp;<code>~/.pwtk/slurm.tcl</code>, <code>~/.pwtk/lsf.tcl</code>,
+    <code>~/.pwtk/pbs.tcl</code>). Templates for these configuration
+    files are available in the <a href="https://pwtk.ijs.si/config/">$PWTK/config/</a>
+    directory.</p>
+    <p>Once such a configuration file is set, a user must instruct <a href="http://pwtk.ijs.si/">PWTK</a> to submit a script to the batch
+    queuing system. For <a href="https://slurm.schedmd.com/">Slurm</a>,
+    this can be achieved by encapsulating the whole script with the
+    <code>SLURM { ... }</code> command (for the other supported job
+    schedulers, analogous commands are <code>LSF</code>,
+    <code>PBS</code>, <code>LL</code>). For example:</p>
+    <pre><code>SLURM {
+    ... here comes the whole script ...
+}</code></pre>
+    <p>Alternatively, the name of the <a href="http://pwtk.ijs.si/">PWTK</a> script file can be supplied to
+    the <code>SLURM</code> command, i.e.:</p>
+    <pre><code>SLURM job.pwtk</code></pre>
+    <p>or the <code>pwtk</code> can be called with the
+    <code>--slurm</code> option from the terminal:</p>
+    <pre><code>pwtk --slurm job.pwtk</code></pre>
+    <p>Note that the <code>--slurm</code> option is configurable,
+    i.e.:</p>
+    <pre><code>pwtk --slurm=profile job.pwtk</code></pre>
+    <p>or</p>
+    <pre><code>pwtk --slurm="profile options" job.pwtk</code></pre>
+    <p>where <em>profile</em> is the name of the user-defined <a href="https://slurm.schedmd.com/">Slurm</a> profile (see below), and
+    <em>options</em> are the <a href="https://slurm.schedmd.com/">Slurm</a> <code>sbatch</code>
+    command-line options.</p>
+    <p>Likewise, also the <a href="http://pwtk.ijs.si/src/slurm_tcl3A3Apwtk3A3Aslurm2F3A3Apwtk3A3ASLURM.html">SLURM</a>
+    command is analogously configurable; its usage is:</p>
+    <ul>
+    <li><p>Either:</p>
+    <blockquote>
+    <p><strong>SLURM</strong> <em>script</em></p>
+    </blockquote></li>
+    <li><p>Or:</p>
+    <blockquote>
+    <p><strong>SLURM</strong> <em>profile script</em></p>
+    </blockquote></li>
+    <li><p>Or:</p>
+    <blockquote>
+    <p><strong>SLURM</strong> <em>profile --option1=value1
+    --option2=value2 … script</em>`</p>
+    </blockquote></li>
+    </ul>
+    <p>where <em>script</em> is either the <a href="http://pwtk.ijs.si/">PWTK</a> script file or the script code
+    and <em>profile</em> is the name of the profile as defined in the
+    user <code>~/.pwtk/slurm.tcl</code> file that contains the <a href="https://slurm.schedmd.com/">Slurm</a> specific directives. If
+    the <em>profile</em> is omitted, the <strong>default</strong>
+    profile is used, which is guaranteed to exist because it is defined
+    in the <code>$PWTK/config/slurm.tcl</code> file.</p>
+    <p>One can define different <em>profiles</em> in the configuration
+    file (e.g., <code>~/.pwtk/slurm.tcl</code>). Here is an example with
+    two defined <a href="https://slurm.schedmd.com/">Slurm</a> profiles,
+    named <strong>default</strong> and <strong>long</strong>:</p>
+    <div class="sourceCode" id="cb25"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb25-1"><a href="https://pwtk.ijs.si/guide.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------------</span></span>
+<span id="cb25-2"><a href="https://pwtk.ijs.si/guide.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a configuration file for PWTK's SLURM utility</span></span>
+<span id="cb25-3"><a href="https://pwtk.ijs.si/guide.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------------</span></span>
+<span id="cb25-4"><a href="https://pwtk.ijs.si/guide.html#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="https://pwtk.ijs.si/guide.html#cb25-5" aria-hidden="true" tabindex="-1"></a>slurm_profile <span class="ot">default</span> <span class="kw">{</span></span>
+<span id="cb25-6"><a href="https://pwtk.ijs.si/guide.html#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#!/bin/sh</span></span>
+<span id="cb25-7"><a href="https://pwtk.ijs.si/guide.html#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb25-8"><a href="https://pwtk.ijs.si/guide.html#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#SBATCH --ntasks=8</span></span>
+<span id="cb25-9"><a href="https://pwtk.ijs.si/guide.html#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#SBATCH --time=6:00:00</span></span>
+<span id="cb25-10"><a href="https://pwtk.ijs.si/guide.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb25-11"><a href="https://pwtk.ijs.si/guide.html#cb25-11" aria-hidden="true" tabindex="-1"></a>    prefix mpirun<span class="ot"> -np</span> <span class="dv">8</span></span>
+<span id="cb25-12"><a href="https://pwtk.ijs.si/guide.html#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb25-13"><a href="https://pwtk.ijs.si/guide.html#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="https://pwtk.ijs.si/guide.html#cb25-14" aria-hidden="true" tabindex="-1"></a>slurm_profile long <span class="kw">{</span></span>
+<span id="cb25-15"><a href="https://pwtk.ijs.si/guide.html#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#!/bin/sh</span></span>
+<span id="cb25-16"><a href="https://pwtk.ijs.si/guide.html#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#SBATCH --partition=long</span></span>
+<span id="cb25-17"><a href="https://pwtk.ijs.si/guide.html#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">#SBATCH --ntasks=64</span></span>
+<span id="cb25-18"><a href="https://pwtk.ijs.si/guide.html#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#SBATCH --time=2-00:00:00</span></span>
+<span id="cb25-19"><a href="https://pwtk.ijs.si/guide.html#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb25-20"><a href="https://pwtk.ijs.si/guide.html#cb25-20" aria-hidden="true" tabindex="-1"></a>    prefix mpirun<span class="ot"> -np</span> <span class="dv">64</span></span>
+<span id="cb25-21"><a href="https://pwtk.ijs.si/guide.html#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+    <p>The usage of the <code>slurm_profile</code> command is (for other
+    supported job schedulers, analogous commands are
+    <code>lsf_profile</code>, <code>pbs_profile</code>, etc.):</p>
+    <blockquote>
+    <p><strong>slurm_profile</strong> <em>name</em>
+    <em>slurmDirectives</em> ?<em>pwtkDirectives</em>?</p>
+    </blockquote>
+    <p>where the last <em>pwtkDirectives</em> argument is optional
+    (hence, denoted with the pair of question marks). Its purpose is to
+    provide <a href="http://pwtk.ijs.si/">PWTK</a> with a default way of
+    running executables. For example, the <strong>long</strong> profile
+    requests 64 tasks, so it is reasonable to run executables with
+    <code>mpirun -np 64</code>.</p>
+    <p>The <strong>long</strong> profile can then be utilized in a <a href="http://pwtk.ijs.si/">PWTK</a> script as:</p>
+    <pre><code>SLURM long job.pwtk</code></pre>
+    <p>or from the terminal as:</p>
+    <pre><code>pwtk --slurm=long job.pwtk</code></pre>
+    <h2 id="math-parser">Math parser</h2>
+    <p>Within namelists and cards, numbers can be specified as
+    mathematical expressions, e.g., <code>1/4*exp(2*log(0.23))</code>.
+    Here is an example of how mathematical expressions can be used in
+    namelists and cards:</p>
+    <pre><code>SYSTEM { celldm(1) = 7.5*sqrt(2)*$angs2bohr }
+ATOMIC_POSITIONS alat {
+   Si    0.0   0.0   0.0
+   Si    1/4   1/4   1/4
+}</code></pre>
+    <p>Notice the <code>$angs2bohr</code> variable in the example above.
+    This is a predefined constant (a conversion factor from Å to bohr
+    units).</p>
+    <p><strong>IMPORTANT:</strong> mathematical expression should be
+    written <strong>without any whitespace</strong>. For example, the
+    <code>1/4 * sqrt(2)</code> expression contains two whitespaces;
+    hence, it is treated as three separate input fields, and the parser
+    returns
+    <code>.25000000000000000000 * 1.41421356237309504880</code>.</p>
+    <h3 id="list-of-predefined-constants">List of predefined
+    constants</h3>
+    <p>Here is a list of predefined constants that can be used in <a href="http://pwtk.ijs.si/">PWTK</a> scripts and mathematical
+    expressions of input data specs. Physical constants correspond to
+    <em>CODATA Internationally Recommended 2018 Values</em>.</p>
+    <ul>
+    <li><p>bohr2angs = 0.529177210903</p></li>
+    <li><p>angs2bohr = 1.0/$bohr2angs</p></li>
+    <li><p>ry2ev = 13.605693122994017</p></li>
+    <li><p>ha2ev = 2.0*$ry2ev</p></li>
+    <li><p>ev2ry = 1.0/$ry2ev</p></li>
+    <li><p>ev2ha = 1.0/$ha2ev</p></li>
+    <li><p>ry2kjm = 1312.7498197399127</p></li>
+    <li><p>ha2kjm = 2.0*$ry2kjm</p></li>
+    <li><p>kjm2ry = 1.0/$ry2kjm</p></li>
+    <li><p>kjm2ha = 1.0/$ha2kjm</p></li>
+    <li><p>pi = 3.14159265358979323844</p></li>
+    <li><p>tpi = 2.0*$pi</p></li>
+    </ul>
+    
+  
+
+</body></html>
