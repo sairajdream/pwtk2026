@@ -1,0 +1,27 @@
+proc neb_plot {name} {
+
+    set gp [::pwtk::gp::plot new $name.pdf]
+
+    $gp options {
+        xlabel    {'Reaction coordinate (relative units)'}
+        ylabel    {'{/Arial-Italics E} − {/Arial-Italics E}_{IS} (eV)'}
+        format.y  '%.1f'
+        format.x  '%.1f'
+        xtics     0,0.2
+        mxtics    4
+        mytics    2
+    }
+
+    $gp plot {[0:1]} \
+        '$name.int' title 'NEB' w l lt 1 lw 4, \
+        '$name.dat' notitle w points lt 1 pt 7 ps 1.2
+
+    $gp exec
+
+    set output [$gp outputs]
+    $gp destroy
+
+    display $output
+}
+
+neb_plot H2+H

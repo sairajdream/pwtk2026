@@ -1,0 +1,9 @@
+&PATH
+   string_method  = 'neb',
+   nstep_path     = 100,
+   opt_scheme     = "broyden",
+   num_of_images  = 7,
+   k_max          = 0.6169,
+   k_min          = 0.4112,
+   path_thr       = 0.1,
+/
